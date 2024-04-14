@@ -1,0 +1,44 @@
+{% extends 'boardgames/base.html' %}
+
+{% block content %}
+<style>
+    .club-container {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        margin-bottom: 30px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .club-name {
+        font-size: 24px;
+        font-weight: 600;
+        color: #f8d17f;
+    }
+    .club-detail {
+        color: #f8d17f;
+    }
+    .join-club-btn {
+        position: absolute;
+        top: 140px;
+        right: 150px;
+    }
+</style>
+    <h1 class="my-4 custom-text-color">Clubs</h1>
+    <div class="container">
+        <div class="d-flex justify-content-end">
+            <a href="{% url 'boardgames:join_club' %}" class="btn btn-primary join-club-btn">Click to Join a Club</a>
+        </div>
+        {% for club in clubs %}
+            <div class="club-container mb-4">
+                <h2 class="club-name">{{ club.name }}</h2>
+                <p class="club-detail">Website: <a href="{{ club.link }}" target="_blank">{{ club.link }}</a></p>
+                <p class="club-detail">Contact: {{ club.contact }}</p>
+                <p class="club-detail">Address: {{ club.address }}, {{ club.city }}</p>
+            </div>
+        {% empty %}
+            <p class="custom-text-color">No clubs found.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

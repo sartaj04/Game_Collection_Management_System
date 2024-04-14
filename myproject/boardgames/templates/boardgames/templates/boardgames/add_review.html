@@ -1,0 +1,17 @@
+{% extends 'boardgames/base.html' %}
+
+{% block content %}
+<h1 class="text-white">Add a Review</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="{{ form.rating.id_for_label }}" class="form-label text-white">Rating:</label>
+        {{ form.rating }}
+    </div>
+    <div class="form-group">
+        <label for="{{ form.comment.id_for_label }}" class="form-label text-white">Comment:</label>
+        {{ form.comment }}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Review</button>
+</form>
+{% endblock %}

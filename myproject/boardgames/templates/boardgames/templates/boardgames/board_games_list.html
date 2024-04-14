@@ -1,0 +1,178 @@
+{% extends 'boardgames/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+  .hot-games-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-bottom: 30px;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+
+  }
+  .hot-games-container::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+    flex-direction: column;
+  justify-content: space-between;
+
+  }
+  .hot-game {
+    flex: 0 0 auto;
+    width: 180px;
+    margin: 10px;
+    text-align: center;
+    color: #D4D4D4;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s;
+    display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  }
+  .hot-game:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+  justify-content: space-between;
+  }
+  .hot-game img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+    flex-direction: column;
+  justify-content: space-between;
+  }
+  .hot-game-title {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #D4D4D4;
+    flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: auto;
+  }
+  .category-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  overflow: hidden;
+  display: block;
+
+  }
+  .category-game-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+  .category-title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #D4D4D4;
+  }
+  .carousel-item {
+    display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+    width: 100%;
+  padding-bottom: 5px;
+  max-width: 100%;
+  }
+
+  .carousel-item::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+  }
+  .game-card {
+    flex: 0 0 auto;
+    width: 180px;
+    margin-right: 10px;
+    background-color: #333333;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s;
+    display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  }
+  .game-card:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  .game-card img {
+    width: 100%;
+    height: 180px;
+  }
+  .game-title {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #D4D4D4;
+  }
+  .game-details {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+    flex-direction: column;
+  justify-content: space-between;
+  margin-top: auto;
+  }
+  .game-details:hover {
+    text-decoration: underline;
+    flex-direction: column;
+  justify-content: space-between;
+  }
+  .hot-game .game-details {
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+}
+</style>
+<div class="container">
+    <h2 style="color: #D4D4D4">Hot Games</h2>
+    <div class="hot-games-container">
+        {% for game in hot_games %}
+        <div class="hot-game">
+            <img src="{{ game.image_url }}" alt="{{ game.title }}">
+                    <h5 class="hot-game-title">{{ game.title }}</h5>
+        <a class="game-details" href="{% url 'boardgames:boardgame_detail' game.pk %}">View Details</a>
+    </div>
+    {% endfor %}
+</div>
+</div>
+<div class="container">
+    {% for category, games in categorized_boardgames.items %}
+    <div class="category-container">
+        <h2 class="category-title">{{ category }}</h2>
+        <div id="carousel-{{ forloop.counter }}" class="carousel">
+            <div class="carousel-item">
+                {% for boardgame in games %}
+                <div class="game-card">
+                    <img src="{{ boardgame.image_url }}" alt="{{ boardgame.title }}">
+                    <h5 class="game-title">{{ boardgame.title }}</h5>
+                    <a class="game-details" href="{% url 'boardgames:boardgame_detail' boardgame.pk %}">View Details</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<script type="text/javascript">
+  document.getElementById("home").className = "nav-link active";
+</script>
+{% endblock %}

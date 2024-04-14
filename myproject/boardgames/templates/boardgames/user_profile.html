@@ -1,0 +1,110 @@
+{% extends 'boardgames/base.html' %}
+
+{% block content %}
+<style>
+    .custom-text-color {
+        color: #f8d17f;
+    }
+    .profile-section {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        margin-bottom: 30px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: #f8d17f;
+    }
+    .profile-section-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #f8d17f;
+        margin-bottom: 10px;
+    }
+    .profile-section-detail {
+        color: #f8d17f;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        color: #f8d17f;
+    }
+    li {
+        padding: 5px 0;
+        color: #f8d17f;
+        transition: all 0.3s;
+    }
+    li:hover {
+        color: #ffffff;
+    }
+    a {
+        color: #f8d17f;
+        transition: all 0.3s;
+    }
+    a:hover {
+        color: #ffffff;
+    }
+</style>
+
+<h1 class="my-4 custom-text-color">{{ user.username }}'s Profile</h1>
+
+<div class="profile-section">
+    <h2 class="profile-section-title">Basic Details</h2>
+    <p class="profile-section-detail">Email: {{ user.email }}</p>
+</div>
+
+<div class="profile-section">
+    <h2 class="profile-section-title">Library</h2>
+    <ul>
+        {% for item in library_items %}
+            <li class="profile-section-detail"><a href="{% url 'boardgames:detail' item.game.pk %}">{{ item.game.title }}</a></li>
+        {% empty %}
+            <li class="profile-section-detail">No games in library.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="profile-section">
+    <h2 class="profile-section-title">Wishlist</h2>
+    <ul>
+        {% for item in wishlist_items %}
+            <li class="profile-section-detail"><a href="{% url 'boardgames:detail' item.game.pk %}">{{ item.game.title }}</a></li>
+        {% empty %}
+            <li class="profile-section-detail">No games in wishlist.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="profile-section">
+    <h2 class="profile-section-title">Game Communities</h2>
+    <ul>
+        {% for community_member in communities %}
+            <li class="profile-section-detail"><a href="{% url 'boardgames:detail' community_member.game.pk %}">{{ community_member.game.title }}</a></li>
+        {% empty %}
+            <li class="profile-section-detail">No communities joined.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="profile-section">
+    <h2 class="profile-section-title">Reviews</h2>
+    <ul>
+        {% for review in reviews %}
+            <li class="profile-section-detail"><a href="{% url 'boardgames:detail' review.game.pk %}">{{ review.game.title }}</a>: <a >Review: </a>{{ review.rating }}/5 {{ review.comment }}</li>
+{% empty %}
+<li class="profile-section-detail">No reviews written.</li>
+{% endfor %}
+</ul>
+
+</div>
+<div class="profile-section">
+    <h2 class="profile-section-title">Clubs</h2>
+    <ul>
+        {% for club in clubs %}
+            <li class="profile-section-detail">{{ club.name }}</li>
+        {% empty %}
+            <li class="profile-section-detail">No clubs joined.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

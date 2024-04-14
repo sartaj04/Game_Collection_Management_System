@@ -1,0 +1,74 @@
+{% extends 'boardgames/base.html' %}
+{% load custom_filters %}
+{% block content %}
+<style>
+    .error-message {
+        color: white;
+    }
+    .community-member {
+        padding: 20px;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    .user-thumbnail {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+    .user-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+</style>
+<h1 class="text-white text-center mb-5">Join the Community</h1>
+
+<div class="row">
+    {% load static %}
+{% for user in users %}
+    <div class="col-lg-4 mb-4">
+        <div class="community-member">
+            <div class="row">
+                <div class="col-4">
+                    <img src="{% static 'user.jpg' %}" class="img-thumbnail user-thumbnail" alt="Image cannot be loaded.">
+                </div>
+                <div class="col-8 user-info">
+                    <p class="text-white mb-0"><b>{{ user.username }}</b></p>
+                    <p class="text-white mb-0">Welcome to our community!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+<br/>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="row justify-content-center mb-2">
+        <button type="submit" class="btn btn-primary">Join Community</button>
+    </div>
+    <div class="row justify-content-center">
+        <button onclick="goBack()" class="btn btn-secondary">Back</button>
+    </div>
+    {% if form.errors %}
+    <div class="error-message">
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    {% endif %}
+</form>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+<br/>
+{% endblock %}

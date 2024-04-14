@@ -1,0 +1,55 @@
+{% extends 'boardgames/base.html' %}
+
+{% block content %}
+<h1 class="my-4 text-white">My Wishlist</h1>
+<div class="row">
+  {% for boardgame in wishlist %}
+  <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card h-100">
+      <div class="card-img-container d-flex align-items-center justify-content-center" style="height: 200px; overflow: hidden;">
+        <img src="{{boardgame.image_url}}" class="card-img-fluid" alt="Image cannot be loaded">
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title text-center">{{ boardgame.title }}</h5>
+        {% load wishList %}
+        {% if boardgame.commerce_links|wishList == "No" %}
+          <p class="card-text mb-0"><b>Status: </b>Not Avaliable</p>
+        {% else %}
+          {% with boardgame.commerce_links|wishList as list %}
+          <p class="card-text mb-0"><b>Status:</b> {{ list.2 }}</p>
+          <p class="card-text mb-0"><b>Sale Price:</b> {{ list.4 }}</p>
+          <p class="card-text mb-0"><b>Regular Price:</b> {{ list.6 }}</p>
+          {% endwith %}
+          <div class="mt-auto">
+            <a href="{% url 'boardgames:boardgame_detail' boardgame.pk %}" class="btn btn-primary">View Details</a>
+            <a href="{% url 'boardgames:remove_from_wishlist' game_id=boardgame.id %}" class="btn btn-danger ms-2">Remove</a>
+            {% load wishList %}
+            {% with boardgame.commerce_links|wishList as list %}
+            <a href="{{ list.0 }}" class="btn btn-success ms-2{% if not list.0 %} disabled{% endif %}">Buy Now</a>
+            {% endwith %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <div class="col-md-6 col-lg-4 mb-4">
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text">No games in your wishlist yet.</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<button type="button" class="btn btn-secondary mt-4" onclick="goBack()">Go Back</button>
+
+<script>
+  function goBack() {
+    window.history.back();
+  }
+  document.getElementById("wishlist").className = "nav-link active";
+</script>
+
+{% endblock %}

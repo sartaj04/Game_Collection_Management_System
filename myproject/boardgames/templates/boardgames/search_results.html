@@ -1,0 +1,93 @@
+{% extends 'boardgames/base.html' %}
+
+{% block content %}
+
+<style>
+  .recommendations-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 30px;
+  }
+  .recommended-game {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 30px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background-color 0.3s;
+  }
+  .recommended-game:hover {
+    background-color: #3E3D53;
+  }
+  .recommended-game img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  .recommended-game-title {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #D4D4D4;
+    text-align: center;
+  }
+  .recommended-game-details {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+    margin-top: auto;
+    text-align: center;
+  }
+  .recommended-game-details:hover {
+    text-decoration: underline;
+  }
+  .back-btn {
+    display: inline-block;
+    margin-top: 10px;
+    color: #fff;
+    background-color: #333333;
+    border: none;
+    text-decoration: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .back-btn:hover {
+    background-color: #AB8000;
+    border-color: #0062cc;
+  }
+</style>
+<div class="container">
+  <h1 class="custom-text-color">Search Results</h1>
+  <div class="recommendations-container">
+    {% for boardgame in results %}
+    <div class="recommended-game">
+      <img src="{{boardgame.image_url}}" alt="{{boardgame.title}}">
+      <h5 class="recommended-game-title">{{boardgame.title}}</h5>
+      <a class="recommended-game-details" href="{% url 'boardgames:boardgame_detail' boardgame.pk %}">View Details</a>
+    </div>
+    {% empty %}
+    <div class="recommended-game">
+      <p class="custom-text-color">No results found.</p>
+    </div>
+    {% endfor %}
+  </div>
+  <button type="button" class="back-btn" onclick="goBack()">Go Back</button>
+</div>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>
+{% endblock %}
+
+
+
+

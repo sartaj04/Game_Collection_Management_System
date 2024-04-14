@@ -1,0 +1,37 @@
+{% extends 'boardgames/base.html' %}
+{% block content %}
+<style>
+    .error-message {
+        color: white;
+    }
+</style>
+<h1 class="custom-text-color text-center mb-5">Join a Club</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="row justify-content-center mb-2">
+        <button type="submit" class="btn btn-primary">Join Club</button>
+    </div>
+    <div class="row justify-content-center">
+        <button type="button" onclick="goBack()" class="btn btn-secondary">Back</button>
+    </div>
+    {% if form.errors %}
+    <div class="error-message">
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    {% endif %}
+</form>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+<br/>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'boardgames/base.html' %}
+
+{% block content %}
+    <h1 class="my-4 text-white">Clubs</h1>
+    <ul>
+        {% for club in clubs %}
+            <li class="my-4 text-white">{{ club.name }}</li>
+        {% empty %}
+            <li class="my-4 text-white">No clubs found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

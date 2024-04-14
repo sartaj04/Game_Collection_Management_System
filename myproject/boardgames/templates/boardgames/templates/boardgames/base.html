@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/xMNZ6o5kPAAO3mUz7Wi3DfEDFOcXdSRiDh1z/u" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoJtKh7z7lGz7fuP4F8nfdFvAOA6Gg/z6Y5J6XqqyGXYM2ntX5" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #232023;
+        }
+
+        .navbar {
+            background-color: #000000;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .navbar img {
+            margin-right: 10px;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,.75);
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #b3d7ff;
+            transition: color 0.3s;
+        }
+
+        .nav-link.active,
+        .nav-link.disabled {
+            color: #fff;
+        }
+    </style>
+    <title>GameShack</title>
+</head>
+<body>
+{% load static %}
+  {% if user.is_authenticated %}
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand text-white" href="{% url 'boardgames:home' %}">
+                <img src="{% static 'logo.jpeg' %}" alt="Logo" height="80" width="100">
+
+
+<!--                GameShack-->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'boardgames:home' %}active{% endif %}" href="{% url 'boardgames:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'boardgames:wishlist' %}active{% endif %}" href="{% url 'boardgames:wishlist' %}">Wishlist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'boardgames:library' %}active{% endif %}" href="{% url 'boardgames:library' %}">Library</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'boardgames:recommendations_user' %}active{% endif %}" href="{% url 'boardgames:recommendations_user' user.id %}">Recommendations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'boardgames:club_list' %}active{% endif %}" href="{% url                         'boardgames:club_list' %}">Club</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search" action="{% url 'boardgames:search' %}" method="GET">
+                    <input name="search_input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+                <p class="text-white my-auto mx-3">Welcome, {{ user.username }}!</p>
+                <a role="button" class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+            </div>
+        </div>
+    </nav>
+  {% else %}
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand text-white" href="{% url 'boardgames:home' %}">
+                <img src="{% static 'logo.jpeg' %}" alt="Logo" height="80" width="100">
+<!--                GameShack-->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'boardgames:home' %}active{% endif %}" href="{% url 'boardgames:home' %}">Home</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search" action="{% url 'boardgames:search' %}" method="GET">
+                    <input name="search_input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+                <a role="button" class="btn btn-primary ms-2" href="{% url 'login' %}">Login</a>
+                <a role="button" class="btn btn-primary ms-2" href="{% url 'boardgames:signup' %}">Sign up</a>
+            </div>
+        </div>
+    </nav>
+  {% endif %}
+
+  <div class="container" style="margin-top: 20px">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>
+
