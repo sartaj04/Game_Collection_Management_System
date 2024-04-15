@@ -4,17 +4,6 @@
 
 This file consists of methods to access our prototype. 
 
-# Method 1
-
-The prototype is currently hosted on Google Cloud Platform as a website naed 'Game Shack'. Click on the below link to access our web-based solution for the coursework:
-
-Link: http://34.83.111.87:8001/
-
-*Only if the above link doesn't work or it says that the server is down, follow the steps mentioned in method 2 below*
-
-# Method 2
-
-In case the first method is unavailable then please follow the below steps. 
 
 ## Requisites 
 
