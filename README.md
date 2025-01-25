@@ -1,8 +1,15 @@
-## MSc Software Development CourseWork 
+# 🎲 Game Shack - Board Game Collection Management  
 
-**Smith__Hale_and_Wagner Project:**
+## 📌 Project Overview  
+**Game Shack** is a web-based solution designed to help users manage their **board game collections** efficiently. This platform enables users to **search, track, review, and purchase** board games while connecting with a like-minded community.  
 
-This file consists of methods to access our prototype. 
+## 🚀 Features  
+- **User Registration & Authentication**: Secure login/signup system with different user roles (Player, Admin, Club Organizer, etc.).  
+- **Game Search & Recommendations**: Search games by title, designer, artist, or publisher with a personalized recommender system.  
+- **Wishlist & Library Management**: Add favorite games to a wishlist or library for easy tracking.  
+- **Community Engagement**: Join game-based communities, participate in discussions, and share reviews.  
+- **Board Game Details & Purchase**: View game specifications, components, and direct purchase links.  
+- **UI/UX Optimization**: Designed with an intuitive user experience for seamless navigation.  
 
 
 ## Requisites 
@@ -128,14 +135,6 @@ s2424386sdoc@eidf018-sdoc6:~/Desktop/Smith__Hale_and_Wagner$ pwd
 
 You can connect to this server and go to the path and execute the makemigrations, migrations and runserver commands as shown above in step 3. 
 
-## Things to know
-
-1. The code of the prototype is present in the below path: 
-https://git.ecdf.ed.ac.uk/sdoc2223/Smith__Hale_and_Wagner/-/tree/main/myproject
-2. The images and screenshots of the prototype are present in below directory: 
-https://git.ecdf.ed.ac.uk/sdoc2223/Smith__Hale_and_Wagner/-/tree/main/Prototype_Images
-3. All the data monitoring and documentations from Requirement Gathering to prototype evaluation are present in below path:
-https://git.ecdf.ed.ac.uk/sdoc2223/Smith__Hale_and_Wagner/-/tree/main/Project_Documentation
 
 
 
@@ -164,5 +163,4 @@ https://git.ecdf.ed.ac.uk/sdoc2223/Smith__Hale_and_Wagner/-/tree/main/Project_Do
 
 After which the server should be turned up with relevant data inserted into the database.
 
-NOTE: In case any issues are observed and you need to contact us, please send a mail to N.Vupparapalli@sms.ed.ac.uk
 
